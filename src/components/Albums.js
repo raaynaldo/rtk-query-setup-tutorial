@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGetAlbumsQuery } from '../app/services/jsonServerApi';
 
 export default function Albums() {
-  const { data: albums = [], isLoading, isError, error } = useGetAlbumsQuery(1);
+  const [page, setPage] = useState(1);
+  const {
+    data: albums = [],
+    isLoading,
+    isError,
+    error,
+  } = useGetAlbumsQuery(page);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -14,12 +20,23 @@ export default function Albums() {
   }
 
   return (
-    <ul>
-      {albums.map((album) => (
-        <li key={album.id}>
-          {album.id} - {album.title}
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul>
+        {albums.map((album) => (
+          <li key={album.id}>
+            {album.id} - {album.title}
+          </li>
+        ))}
+      </ul>
+      <button disabled={page <= 1} onClick={() => setPage((prev) => prev - 1)}>
+        Prev
+      </button>
+      <button
+        disabled={albums.length < 10}
+        onClick={() => setPage((prev) => prev + 1)}
+      >
+        Next
+      </button>
+    </div>
   );
 }
