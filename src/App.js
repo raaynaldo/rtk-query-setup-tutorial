@@ -1,7 +1,11 @@
-import styles from './App.module.css';
+import Albums from './components/Albums';
 
 function App() {
-  return <div className={styles.wrapper}>Hello World</div>;
+  return (
+    <div>
+      <Albums />
+    </div>
+  );
 }
 
 export default App;
