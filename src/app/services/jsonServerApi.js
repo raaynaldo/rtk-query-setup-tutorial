@@ -7,7 +7,15 @@ export const jsonServerApi = createApi({
     getAlbums: builder.query({
       query: (page = 1) => `albums?_page=${page}&_limit=10`,
     }),
+
+    createAlbum: builder.mutation({
+      query: (title) => ({
+        url: `albums`,
+        method: 'POST',
+        body: { title },
+      }),
+    }),
   }),
 });
 
-export const { useGetAlbumsQuery } = jsonServerApi;
+export const { useGetAlbumsQuery, useCreateAlbumMutation } = jsonServerApi;
