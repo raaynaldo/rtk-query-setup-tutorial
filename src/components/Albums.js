@@ -6,11 +6,12 @@ export default function Albums() {
   const {
     data: albums = [],
     isLoading,
+    isFetching,
     isError,
     error,
   } = useGetAlbumsQuery(page);
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <div>loading...</div>;
   }
 
